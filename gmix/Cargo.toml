@@ -1,0 +1,4 @@
+[package]
+name = "gmix"
+version = "0.1.0"
+authors = ["Erin Sheldon <erin.sheldon@gmail.com>"]

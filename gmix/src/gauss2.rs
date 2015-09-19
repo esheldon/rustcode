@@ -13,14 +13,14 @@ pub struct Gauss2 {
 }
 
 impl Gauss2 {
-    pub fn new(p:f64, cen:&Point2, cov:&Cov2) {
+    pub fn new(p:f64, cen:&Point2, cov:&Cov2) -> Gauss2 {
         let norm = 1./( 2.0*PI*cov.det.sqrt() );
         let pnorm = p*norm;
 
         Gauss2 {
             p: p,
-            cen: cen.clone(),
-            cov: cov.clone(),
+            cen: *cen,
+            cov: *cov,
             norm: norm,
             pnorm: pnorm,
         }

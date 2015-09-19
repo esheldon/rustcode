@@ -8,7 +8,7 @@ pub struct Cov2 {
     // det may be zero, but we may only be adding this covariance
     // matrix to another during convolution, in which case it is OK
     // so we delay setting it
-    pub det_is_set: i32,
+    pub det_is_set: bool,
     pub det: f64,
 
     pub dxx: f64,
@@ -24,7 +24,7 @@ impl Cov2 {
             ixx: ixx,
             ixy: ixy,
             iyy: iyy,
-            det_is_set: 0,
+            det_is_set: false,
             det: 0.0,
             dxx: 0.0,
             dxy: 0.0,
@@ -46,7 +46,7 @@ impl Cov2 {
         self.dxy = self.ixy*idet;
         self.dyy = self.iyy*idet;
 
-        self.det_is_set=1;
+        self.det_is_set=true;
 
         Ok( () )
     }

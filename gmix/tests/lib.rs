@@ -38,8 +38,8 @@ fn test_cov2_bad() {
 
 #[test]
 fn test_gauss2() {
-    let x=1.5;
-    let y=2.5;
+    let x=15.25;
+    let y=14.75;
     let cen = Point2 {x: x, y: y};
 
     let ixx=3.5;
@@ -61,15 +61,20 @@ fn test_gauss2() {
     assert_eq!(g.cov.ixy, ixy);
     assert_eq!(g.cov.iyy, iyy);
 
-    match g.cov.set_det() {
+    match g.set_norm() {
         Err(_) => panic!("should not happen"),
         Ok(_) => {},
     }
-
 
     assert_eq!(g.cov.det, det);
     assert_eq!(g.cov.dxx, ixx*idet);
     assert_eq!(g.cov.dxy, ixy*idet);
     assert_eq!(g.cov.dyy, iyy*idet);
+
+    let pt = Point2 {x: 15.0, y: 15.0};
+    let val = g.eval(&pt);
+    println!("val: {}", val);
+
+    assert!( (val - 7.82612914989326).abs() < 1.0e-14);
 
 }

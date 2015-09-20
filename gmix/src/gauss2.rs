@@ -48,14 +48,12 @@ impl Gauss2 {
         Ok( () )
     }
 
+    #[inline(always)]
     pub fn eval(&self, pt: &Point2) -> f64 {
 
-        // we cannot evaluate until we have set the cov
-        // determinant and d* convenience fields, as well
-        // as the norm/pnorm fields. But we don't want
-        // this evaluation to return a Result or Option
-        
-        assert!(self.norm_is_set);
+        // we cannot evaluate until we have set the determinant
+        // and d* convenience fields
+        debug_assert!(self.norm_is_set);
 
         let xd = pt.x-self.cen.x;
         let yd = pt.y-self.cen.y;
